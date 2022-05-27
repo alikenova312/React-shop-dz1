@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+
+<div id="project"></div>
+
+<script type="text/babel">
+
+
+    function MyApp() {
+        const [todo, setTodo] = React.useState("")
+        const [todos, setTodos] = React.useState([])
+
+        function todoHandler(event) {
+            setTodo(event.target.value)
+        }
+        function buttonOnClick() {
+            setTodos([...todos, todo])
+            setTodo("")
+        }
+
+
+
+        return (
+            <div className="project-todo">
+                <input className="input" autoFocus="" type="text" value={todo} onChange={todoHandler}/>
+                <button onClick={buttonOnClick}>add</button>
+                <hr/>
+                {todos.map((element, index) => <TodoItem text = {element} key = {index}/>)}
+            </div>
+
+        )
+    }
+
+    function TodoItem(text) {
+        return <div>{text}</div>
+    }
+
+
+    ReactDOM.render(<MyApp/>, document.getElementById('todo'));
+</script>
+</body>
+</html>
